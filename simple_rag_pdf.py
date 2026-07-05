@@ -1,7 +1,8 @@
+## PROCESS OVERVIEW
 # 1 upload pdf, select llm model and embedding model(streamlit)
 # 2 extract text from pdf - SimplePDFProcessor class
 # 3 make chunks of text, with ids and metadata - SimplePDFProcessor class
-# 4 create collection with a specific embedding function - 
+# 4 create collection with a specific embedding function
 # 5 add documents to the collection with metadata, each documents having data of each chunk
 # 6 ask a query
 # 7 retrieve similar docs from collection
@@ -80,9 +81,7 @@ class SimpleModelSelector:
         # Available LLM models
         self.llm_models = {
             "ollama-llama": "llama3.2",
-            "ollama-qwen":"qwen3:0.6b",
-            "ollama-mistral":"mistral",
-            "ollama-deepseek":"deepseek-r1:8b"            
+            "ollama-qwen":"qwen3:0.6b"     
         }
         
 
@@ -146,10 +145,6 @@ class SimpleRagSystem:
             self.llm="llama3.2"
         elif self.llm_model=="ollama-qwen":
             self.llm="qwen3:0.6b"
-        elif self.llm_model=="ollama-mistral":
-            self.llm="mistral"
-        else:
-            self.llm="deepseek-r1:8b"
         self.collection = None
     def generate_collection(self):
         """generate collection"""
