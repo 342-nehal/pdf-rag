@@ -1,0 +1,31 @@
+services:
+  # --- Service 1: Ollama (LLM server) ---
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+  # Why a separate container?
+  # Ollama is its own program. Official image = no custom Dockerfile needed.
+
+  # Why volume ollama_data?
+  # Downloaded models (llama3.2, etc.) persist after restart.
+
+  # --- Service 2: Your Streamlit app ---
+  rag_app:
+    build: .
+    container_name: rag-app
+    ports:
+      - "8501:8501"
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    volumes:
+      - chroma_data:/app/db
+    depends_on:
+      - ollama
+    restart: unless-stopped
+# Named volumes (Docker manages storage on the VPS disk)
+volumes:
+  ollama_data:
+  chroma_data:
