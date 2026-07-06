@@ -225,7 +225,7 @@ class SimpleRagSystem:
             "model": self.embedding_model
             }
 def main():
-    st.title("🤖 Simple RAG System")
+    st.title("🤖 Vedic Simple RAG System")
 
     # Initialize session state
     if "processed_files" not in st.session_state:
